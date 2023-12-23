@@ -171,6 +171,7 @@ namespace characters
                                     case "y":
                                         persons[selected_character - 1].vost();
                                         persons[selected_character - 1].respawn();
+                                        person_counter++;
                                         Console.WriteLine("Your healt: " + persons[selected_character - 1].hp);
                                         Console.WriteLine("Press any button to continue");
                                         Console.ReadKey();
@@ -274,30 +275,32 @@ namespace characters
         }
         private string enemy_fraction()
         {
-            string fraction_name ="neutral";
-            int fract = rand.Next(3);
-            if (fract == 1)
+            string fraction_name ="Neutral";
+            int fract = rand.Next(2);
+            if (fract == 0)
             {
                 fraction_name = "orc";
                 return fraction_name;
             }
-            if(fract == 2) 
+            if(fract == 1) 
             {
-                fraction_name = "neutral";
+                fraction_name = "Neutral";
                 return fraction_name;
             }
             return fraction_name;
         }
         private void enemy_exist(int selected_character)
         {
+            int team_damage = 0;
             int enemy_counter = 0;
             int enemy = rand.Next(4);
-            int enemy_hp = rand.Next(20, 50);
+            int enemy_hp = rand.Next(20, 40);
             int enemy_damage = rand.Next(10, 30);
             if (enemy == 3)
             {
-                while (enemy_hp > 0)
+                while ((enemy_hp > 0) && (persons[selected_character-1].hp>0))
                 {
+                    Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("You on the same coordinates with enemy");
                     Console.ForegroundColor = ConsoleColor.White;
@@ -312,7 +315,6 @@ namespace characters
                     }
                     ConsoleKey select_key = Console.ReadKey().Key;
                     Console.WriteLine();
-                    int team_damage = 0;
                     switch (select_key)
                     {
                         case ConsoleKey.W:
@@ -357,7 +359,7 @@ namespace characters
                             Console.WriteLine("Now on this coordinates: " + person_counter + " your characters");
                             Console.WriteLine("Press any button to continue");
                             Console.ReadKey();
-                            break;
+                            continue;
                     }
                     break;
                 }

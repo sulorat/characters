@@ -99,7 +99,6 @@ namespace characters
             if (this.hp < 0)
             {
                 hp = 0;
-                person_counter--;
             }
               
             return hp;

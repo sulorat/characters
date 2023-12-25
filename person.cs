@@ -231,7 +231,6 @@ namespace characters
                                     Console.WriteLine("Press any button to continue");
                                     enemy_exist(selected_character);
                                     Console.ReadKey();
-                                    
                                     break;
                                 case ConsoleKey.F:
                                     persons[selected_character - 1].del();
@@ -323,12 +322,12 @@ namespace characters
                     Console.WriteLine("W - to hit character\nE - to get out from this coordinates\nR - to call for help");
                     while ((persons[selected_character-1].hp >0) || (persons[i].hp > 0))
                     {
-                        Console.Clear();
                         switch (Console.ReadKey().Key) 
                         { 
                             case ConsoleKey.W:
                                 if (team_damage > 0)
                                 {
+
                                     Console.WriteLine();
                                     Console.WriteLine($"HP enemy character:   {persons[i].hp - team_damage}");
                                     Console.WriteLine("You were attacked in response");

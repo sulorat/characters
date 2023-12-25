@@ -17,8 +17,8 @@ namespace characters
         private int hp;
         private int damage;
         private int max_hp;
-        private string fraction = "neutral";
-        public person(string name, int x, int y, int quantity_lifes, int damage, int hp)
+        private string fraction;
+        public person(string name, int x, int y, int quantity_lifes, int damage, int hp, string fraction)
         {
             this.name = name;
             this.x = x;
@@ -27,7 +27,7 @@ namespace characters
             this.damage = damage;
             this.hp = hp;
             this.max_hp = hp;
-            this.fraction = "Neutral";
+            this.fraction = fraction;
             persons.Add(this);
         }        
         Random rand = new Random();
@@ -111,6 +111,8 @@ namespace characters
         int person_counter=1;
         public void input()
         {
+            string _fraction="";
+            Console.WriteLine();
             Console.WriteLine("Enter how many persons you will have");
             int person_num = int.Parse(Console.ReadLine());
             Console.WriteLine("Choose your character. You have: " + person_counter);
@@ -139,7 +141,18 @@ namespace characters
                             int quantyty_lifes1 = int.Parse(Console.ReadLine());
                             int hp_pers = rand.Next(30, 70);
                             int damage_pers = rand.Next(70, 100);
-                            person persona = new person(name,x_pers,y_pers,quantyty_lifes1,damage_pers,hp_pers);
+                            Console.WriteLine("Enter which fracture u will be\nQ - Neutral\nW - Enemy");
+                            switch (Console.ReadKey().Key)
+                            {
+                                case ConsoleKey.Q:
+                                     _fraction= "Neutral";
+                                    break;
+                                case ConsoleKey.W:
+                                    _fraction = "Orc";
+                                    relationships = false;
+                                    break;
+                            }
+                            person persona = new person(name,x_pers,y_pers,quantyty_lifes1,damage_pers,hp_pers,_fraction);
                             person_counter++;
                         }
                     }
@@ -292,10 +305,70 @@ namespace characters
         private void enemy_exist(int selected_character)
         {
             int team_damage = 0;
+            int enemy_char;
+            int enemy_ch_count=0;
+            int allies=1;
             int enemy_counter = 0;
             int enemy = rand.Next(4);
             int enemy_hp = rand.Next(20, 40);
             int enemy_damage = rand.Next(10, 30);
+            for(int i = 0; i < persons.Count;i++)
+            {
+                if ((persons[i].x == persons[selected_character - 1].x && (persons[i].y == persons[selected_character - 1].y))&&(persons[i].fraction != persons[selected_character-1].fraction))
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("You on the same coordinates with enemy");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("W - to hit character\nE - to get out from this coordinates\nR - to call for help");
+                    while ((persons[selected_character-1].hp >0) || (persons[i].hp > 0))
+                    {
+                        Console.Clear();
+                        switch (Console.ReadKey().Key) 
+                        { 
+                            case ConsoleKey.W:
+                                if (team_damage > 0)
+                                {
+                                    Console.WriteLine();
+                                    Console.WriteLine($"HP enemy character:   {persons[i].hp - team_damage}");
+                                    Console.WriteLine("You were attacked in response");
+                                    for (int j = 0; j < person_counter; j++)
+                                    {
+                                        Console.WriteLine();
+                                        Console.WriteLine("HP your character: " + persons[j].taken_damage(persons[i].damage / allies));
+                                    }
+                                    Console.WriteLine("Press any button to continue");
+                                    Console.ReadKey();
+                                    break;
+                                }
+                                Console.WriteLine();
+                                Console.WriteLine("You attacked enemy character");
+                                persons[i].hp -= persons[selected_character - 1].damage;
+                                persons[selected_character - 1].hp -= persons[i].damage;
+                                Console.WriteLine("HP enemy character: + " + persons[i].taken_damage(persons[selected_character - 1].damage));
+                                Console.WriteLine("HP your character: + " + persons[selected_character - 1].taken_damage(persons[i].damage));
+                                break;
+                            case ConsoleKey.E:
+                                persons[selected_character - 1].movex(1);
+                                Console.WriteLine("You move for X. Now you on X: "+ persons[selected_character-1].x );
+                                break;
+                            case ConsoleKey.R:
+                                for (int j = 0; j < person_counter; j++)
+                                {
+                                    if (persons[j].fraction == persons[selected_character - 1].fraction)
+                                    {
+                                        allies++;
+                                        persons[j].x = persons[selected_character - 1].x;
+                                        persons[j].y = persons[selected_character - 1].y;
+                                        team_damage += persons[j].damage;
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+            
             if (enemy == 3)
             {
                 while ((enemy_hp > 0) && (persons[selected_character-1].hp>0))
@@ -352,11 +425,15 @@ namespace characters
                         case ConsoleKey.R:
                             for (int i = 0; i < person_counter; i++)
                             {
-                                persons[i].x = persons[selected_character - 1].x;
-                                persons[i].y = persons[selected_character - 1].y;
-                                team_damage += persons[i].damage;
+                                if (persons[i].fraction == persons[selected_character - 1].fraction)
+                                {
+                                    allies++;
+                                    persons[i].x = persons[selected_character - 1].x;
+                                    persons[i].y = persons[selected_character - 1].y;
+                                    team_damage += persons[i].damage;
+                                }
                             }
-                            Console.WriteLine("Now on this coordinates: " + person_counter + " your characters");
+                            Console.WriteLine("Now on this coordinates: " + allies + " your characters");
                             Console.WriteLine("Press any button to continue");
                             Console.ReadKey();
                             continue;

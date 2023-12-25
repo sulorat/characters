@@ -29,7 +29,7 @@ namespace characters
                         fraction = "Orc";
                         break;
                 }
-                int damage = random.Next(30,70);
+                int damage = random.Next(30,50);
                 int hp = random.Next(70, 100);
                 person person = new person(name,x,y,quantity,damage,hp,fraction);
                 person.input();

@@ -1,0 +1,14 @@
+C:\Users\alexa\source\repos\ConsoleApp36\ConsoleApp36\bin\Debug\net8.0\ConsoleApp36.exe
+C:\Users\alexa\source\repos\ConsoleApp36\ConsoleApp36\bin\Debug\net8.0\ConsoleApp36.deps.json
+C:\Users\alexa\source\repos\ConsoleApp36\ConsoleApp36\bin\Debug\net8.0\ConsoleApp36.runtimeconfig.json
+C:\Users\alexa\source\repos\ConsoleApp36\ConsoleApp36\bin\Debug\net8.0\ConsoleApp36.dll
+C:\Users\alexa\source\repos\ConsoleApp36\ConsoleApp36\bin\Debug\net8.0\ConsoleApp36.pdb
+C:\Users\alexa\source\repos\ConsoleApp36\ConsoleApp36\obj\Debug\net8.0\ConsoleApp36.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\alexa\source\repos\ConsoleApp36\ConsoleApp36\obj\Debug\net8.0\ConsoleApp36.AssemblyInfoInputs.cache
+C:\Users\alexa\source\repos\ConsoleApp36\ConsoleApp36\obj\Debug\net8.0\ConsoleApp36.AssemblyInfo.cs
+C:\Users\alexa\source\repos\ConsoleApp36\ConsoleApp36\obj\Debug\net8.0\ConsoleApp36.csproj.CoreCompileInputs.cache
+C:\Users\alexa\source\repos\ConsoleApp36\ConsoleApp36\obj\Debug\net8.0\ConsoleApp36.dll
+C:\Users\alexa\source\repos\ConsoleApp36\ConsoleApp36\obj\Debug\net8.0\refint\ConsoleApp36.dll
+C:\Users\alexa\source\repos\ConsoleApp36\ConsoleApp36\obj\Debug\net8.0\ConsoleApp36.pdb
+C:\Users\alexa\source\repos\ConsoleApp36\ConsoleApp36\obj\Debug\net8.0\ConsoleApp36.genruntimeconfig.cache
+C:\Users\alexa\source\repos\ConsoleApp36\ConsoleApp36\obj\Debug\net8.0\ref\ConsoleApp36.dll
